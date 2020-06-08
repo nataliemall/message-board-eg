@@ -1,0 +1,5 @@
+mydb.db
+server.js
+public/
+  index.html
+  script.js
