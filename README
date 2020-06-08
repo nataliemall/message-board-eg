@@ -3,3 +3,19 @@ server.js
 public/
   index.html
   script.js
+
+
+
+
+x Make index.html with textbox and button
+x In index.html, we made fake comments with <p>
+x Make server.js with express.static('public')
+
+. In server.js, add app.get('/api/hello') which does res.send('hello!')
+  . Try it out: Go to localhost:4002/api/hello
+. In server.js, add app.get('/api/messages') which does res.send(["message1", "message2"])
+. In your frontend (index.html, script.js), fetch('/api/messages') and display it in place of the fake comments
+
+. Add app.post('/api/messages') using a variable (Use that variable for app.get('/api/messages') too)
+
+. Replace the variable stuff with database stuff
