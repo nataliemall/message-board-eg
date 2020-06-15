@@ -10,6 +10,11 @@ async function startApp() {
     const app = express();
     app.use(express.json()) // for parsing application/json
 
+    // let router = require('express').Router();
+    // let bodyParser = require('body-parser');
+    // router.use(bodyParser.json());
+
+
     const PORT = process.env.PORT || 4002;
 
     app.use(express.static('public'));
@@ -25,14 +30,25 @@ async function startApp() {
     //     res.send(["message1", "message2"])
     //     })
 
-    app.get('/api/messages', async (req, res) => {
+    app.get('/api/messages', async (req, res) => {  //insert message to display here
       // await fakeNetworkDelay();
-      db.all('SELECT date, time FROM messages;', (err, rows) => {
+
+      // test340 = db.all('SELECT date FROM messages;')
+      // console.log(rows);
+      
+      db.all('SELECT date, time, message FROM messages;', (err, rows) => {
+
         res.send(rows)
+
+        // Just send 10 most recent rows? 
+        // console.log(rows)
         // res.send('test1');
+
         // TODO error handling
       });
     });
+
+
     app.put('/api/messages/', async (req, res) => {
     // await fakeNetworkDelay();
         console.log('Test PUT at messages')
