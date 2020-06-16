@@ -29,14 +29,20 @@ async function startApp() {
 
     //     res.send(["message1", "message2"])
     //     })
+    // SELECT * FROM Table ORDER BY date(dateColumn) DESC Limit 1
+
+    db.all('SELECT message FROM messages ORDER BY date DESC Limit 10;', (err, rows) => {
+    
+    console.log(rows);
+      })
 
     app.get('/api/messages', async (req, res) => {  //insert message to display here
       // await fakeNetworkDelay();
 
-      // test340 = db.all('SELECT date FROM messages;')
-      // console.log(rows);
-      
-      db.all('SELECT date, time, message FROM messages;', (err, rows) => {
+      // console.log(db)
+
+      db.all('SELECT message FROM messages ORDER BY date DESC Limit 10;', (err, rows) => {
+      // db.all('SELECT date, time, message FROM messages;', (err, rows) => {
 
         res.send(rows)
 
@@ -70,6 +76,60 @@ async function startApp() {
           
         });
 
+
+    app.get('/api/messages/random', async (req, res) => {
+      console.log('Test Random get route');
+
+      // db.all('COUNT * FROM messages')
+
+      const command2 = 
+      `SELECT message FROM messages;`;
+      // 'SELECT COUNT (*) from messages';
+
+      db.all(command2, (err, rows) => {
+        // res.send("done");
+        console.log('second command2');
+        console.log('command 2 return', rows.length);
+
+        var number_of_messages = rows.length; 
+        var random_num = Math.floor(Math.random() * rows.length);
+        console.log('random num', random_num)
+
+        var random_message = rows[random_num].message
+        // console.log(random_message.message)
+
+        console.log('random message', random_message)
+
+        var random_json = rows[random_num];
+        console.log('random json', random_json);
+
+        // var rows = random_json;
+        console.log(typeof rows)
+        console.log('random json type', typeof random_json);
+        res.send(random_json)
+
+
+
+        // res.send(random_json);
+        // res.send(rows)
+
+
+        // console.log(rows.value)
+        if (err) {
+          console.log(err)
+        }
+          });
+      
+
+      // find number of messages 
+      // get random number n from length
+      // extract nth message
+      // res.send(nth_message)
+    })
+
+
+
+
     app.listen(PORT, () => console.log(`Example app listening at http://localhost:${PORT}`))
 
     }
@@ -99,6 +159,8 @@ function getTime() {
     .padStart(2, '0');
   return `${hours}:${minutes}`;
 }
+
+
 
 
 

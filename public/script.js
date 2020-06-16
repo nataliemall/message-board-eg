@@ -2,24 +2,42 @@ console.log('Hello2')
 // const express = require('express');
 // const app = express();
 const displayElement = document.getElementById('submitted_happy_thoughts');
-
-
-
 const submit_button = document.getElementById('submit_button');
+
+const randomThoughtElement = document.getElementById('random_thought');
+const random_button = document.getElementById('random_button');
 
 function refreshDisplay() {
   fetch('/api/messages')
     .then(result => result.json() // console.log(result) 
       )
+    // .then(console.log(result))
     .then(data => displayMessage(data) //console.log(data)
-      
       )
     .catch(error => console.log('Error'));
 }
 
-function displayMessage(message1) {
+function displayMessage(message1) {      
   displayElement.innerHTML = message1
     .map(record => JSON.stringify(record))
+    .join('<br>');
+}
+
+
+
+function refreshRandom() {
+  fetch('/api/messages/random')
+    .then(result => result.json() //are "result" and "data" made up by you? 
+      )
+    .then(data => displayRandom(data)
+      )
+    .catch(error => console.log('Error on random refresh'));  //this error keeps happening
+}
+
+
+function displayRandom(message2) {
+  randomThoughtElement.innerHTML = message2
+    .map(record => JSON.stringify(record))  //Pandu what is this about
     .join('<br>');
 }
 
@@ -67,6 +85,15 @@ submit_button.addEventListener('click', () => {
     console.log('TEST');
 })
 
+random_button.addEventListener('click', () => {
+  console.log('random_button was clicked');
+  fetch('/api/messages/random', {
+    method: 'GET'
+  }).then(() => {
+    refreshRandom();
+    console.log('test random fetch')
+  })
+  } );
 
 
 

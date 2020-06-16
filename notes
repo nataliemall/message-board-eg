@@ -1,0 +1,8 @@
+notes:
+
+run server.js from terminal => 
+server starts reading database, connects to port using express => 
+server runs the script files (or everything in the public folder) using express(static) =>
+browser runs the html file =>
+feedback taken from listener buttons on client-side script => 
+sent to server side via fetch, code executed based on routers matched 
