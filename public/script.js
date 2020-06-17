@@ -36,9 +36,19 @@ function refreshRandom() {
 
 
 function displayRandom(message2) {
-  randomThoughtElement.innerHTML = message2
-    .map(record => JSON.stringify(record))  //Pandu what is this about
-    .join('<br>');
+
+  console.log('thing to adjust', message2)
+
+  var number_of_messages = message2.length; 
+  var random_num = Math.floor(Math.random() * message2.length);
+  console.log('num of messages:', number_of_messages)
+  var random_message = message2[random_num].message
+  console.log('random message', random_message)
+
+
+  randomThoughtElement.innerHTML = random_message
+    // .map(record => JSON.stringify(record))  //Pandu what is this about
+    // .join('<br>');
 }
 
 submit_button.addEventListener('click', () => {

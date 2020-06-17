@@ -106,7 +106,7 @@ async function startApp() {
         // var rows = random_json;
         console.log(typeof rows)
         console.log('random json type', typeof random_json);
-        res.send(random_json)
+        res.send(rows)
 
 
 
