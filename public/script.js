@@ -17,12 +17,15 @@ function refreshDisplay() {
     .catch(error => console.log('Error'));
 }
 
-function displayMessage(message1) {      
-  displayElement.innerHTML = message1
-    .map(record => JSON.stringify(record))
-    .join('<br>');
-}
+function displayMessage(message1) {   
+  var recent_quotes = message1;
+  // var justQuotes = message1[message];
+  // console.log('quotes:', Object.entries(message1));
 
+  displayElement.innerHTML = message1[1].message
+    // .map(record => JSON.stringify(record))
+    // .join('<br>');
+}
 
 
 function refreshRandom() {
@@ -49,6 +52,7 @@ function displayRandom(message2) {
   randomThoughtElement.innerHTML = random_message
     // .map(record => JSON.stringify(record))  //Pandu what is this about
     // .join('<br>');
+  // <3
 }
 
 submit_button.addEventListener('click', () => {

@@ -31,9 +31,9 @@ async function startApp() {
     //     })
     // SELECT * FROM Table ORDER BY date(dateColumn) DESC Limit 1
 
-    db.all('SELECT message FROM messages ORDER BY date DESC Limit 10;', (err, rows) => {
+    db.all('SELECT message FROM messages ORDER BY date DESC, time Limit 10;', (err, rows) => {
     
-    console.log(rows);
+    // console.log(rows);
       })
 
     app.get('/api/messages', async (req, res) => {  //insert message to display here
@@ -41,9 +41,10 @@ async function startApp() {
 
       // console.log(db)
 
-      db.all('SELECT message FROM messages ORDER BY date DESC Limit 10;', (err, rows) => {
+      db.all('SELECT message FROM messages ORDER BY date DESC, time DESC Limit 10;', (err, rows) => {
       // db.all('SELECT date, time, message FROM messages;', (err, rows) => {
 
+        console.log(rows)
         res.send(rows)
 
         // Just send 10 most recent rows? 
