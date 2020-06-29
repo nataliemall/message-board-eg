@@ -22,9 +22,13 @@ function displayMessage(message1) {
   // var justQuotes = message1[message];
   // console.log('quotes:', Object.entries(message1));
 
-  displayElement.innerHTML = message1[1].message
+  var i;
+    for (i = 0; i < 11; i++) {
+    // text += cars[i] + "<br>";
+    displayElement.innerHTML += ( message1[i].message + '<br>' )
     // .map(record => JSON.stringify(record))
     // .join('<br>');
+    }
 }
 
 

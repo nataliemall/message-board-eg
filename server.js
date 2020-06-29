@@ -77,6 +77,19 @@ async function startApp() {
           
         });
 
+    app.get('/api/fakeobject', (req, res) => {
+      const myObject = {
+        key1: "value",
+        key2: 3,
+        key3: [{}]
+      };
+      const myNewObject = {
+        newKey2: myObject.key2
+      }
+      // const myMessage = JSON.stringify(myObject);
+      res.send(myNewObject);
+    })
+
 
     app.get('/api/messages/random', async (req, res) => {
       console.log('Test Random get route');
