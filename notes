@@ -6,3 +6,24 @@ server runs the script files (or everything in the public folder) using express(
 browser runs the html file =>
 feedback taken from listener buttons on client-side script => 
 sent to server side via fetch, code executed based on routers matched 
+
+
+
+Heroku steps: 
+
+- installed Heroku (software that runs things on a virtual computer)
+- launched website, by "deploying" with node: 
+https://devcenter.heroku.com/articles/deploying-nodejs#deploy-your-application-to-heroku
+or
+https://devcenter.heroku.com/articles/getting-started-with-nodejs?singlepage=true
+
+- make sure all the app dependencies are declared on package.json 
+	- heroku create
+	- git push heroku master
+
+PostgresQL database steps: 
+- 
+
+
+heroku addons:create heroku-postgresql:hobby-dev
+npm install pg
