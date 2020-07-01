@@ -21,6 +21,7 @@ function displayMessage(message1) {
   var recent_quotes = message1;
   // var justQuotes = message1[message];
   // console.log('quotes:', Object.entries(message1));
+  console.log('recent quotes', recent_quotes)
 
   var i;
     for (i = 0; i < 11; i++) {
