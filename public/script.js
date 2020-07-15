@@ -8,28 +8,38 @@ const randomThoughtElement = document.getElementById('random_thought');
 const random_button = document.getElementById('random_button');
 
 function refreshDisplay() {
-  fetch('/api/messages')
+  fetch('/api/messages') // gets /api/messages (GET is the default)
     .then(result => result.json() // console.log(result) 
       )
     // .then(console.log(result))
     .then(data => displayMessage(data) //console.log(data)
       )
-    .catch(error => console.log('Error'));
+    .catch(error => console.log('There was an error', error));
 }
 
 function displayMessage(message1) {   
   var recent_quotes = message1;
+
   // var justQuotes = message1[message];
   // console.log('quotes:', Object.entries(message1));
   console.log('recent quotes', recent_quotes)
 
-  var i;
-    for (i = 0; i < 11; i++) {
-    // text += cars[i] + "<br>";
-    displayElement.innerHTML += ( message1[i].message + '<br>' )
-    // .map(record => JSON.stringify(record))
-    // .join('<br>');
-    }
+  var mydata = (recent_quotes) ? recent_quotes.rows: null ;
+  // var mydata = JSON.parse(recent_quotes);
+  console.log('mydata', mydata)
+  var test5 = JSON.stringify(recent_quotes);
+  console.log('stringified:', recent_quotes);
+
+  displayElement.innerHTML += test5;
+
+  // below is the code for decripting the data from the sqlite database:
+  // var i;
+  //   for (i = 0; i < 11; i++) {
+  //   // text += cars[i] + "<br>";
+  //   displayElement.innerHTML += ( message1[i].message + '<br>' )
+  //   // .map(record => JSON.stringify(record))
+  //   // .join('<br>');
+  //   }
 }
 
 

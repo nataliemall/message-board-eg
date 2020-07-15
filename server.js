@@ -61,6 +61,31 @@ async function startApp() {
     app.get('/api/messages', async (req, res) => {  //insert message to display here
       // await fakeNetworkDelay();
 
+      try {
+        const client = await pool.connect();
+
+        const { rows: name } = await client.query('SELECT name FROM test_table');
+        // const results = { 'results': (result) ? result.rows : null};  //needed when you SELECT * FROM test_table;
+
+        console.log('result test', name);
+        // console.log('Find the part of the table you want to send here');
+        // console.log('raw result', (result) ? result.rows: null);
+        // const raw_results = (result) ? result.rows: null;
+        // console.log('raw_result:', raw_results);
+
+        // var column_name = raw_results.name;
+        // console.log('column_name', column_name);
+
+        const results = {'result_header':(name) ? name.rows: null } ;
+        console.log('thing being sent:', results);
+
+        res.send( name );
+        client.release();
+      } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+      } 
+
       // console.log(db)
 
       // try {
@@ -75,18 +100,19 @@ async function startApp() {
       // }
 
       // commented out because it's sqlite stuff: (july 14 2020)
-      db.all('SELECT message FROM messages ORDER BY date DESC, time DESC Limit 10;', (err, rows) => {
-      // db.all('SELECT date, time, message FROM messages;', (err, rows) => {
+      // db.all('SELECT message FROM messages ORDER BY date DESC, time DESC Limit 10;', (err, rows) => {
+      // // db.all('SELECT date, time, message FROM messages;', (err, rows) => {
 
-        console.log(rows)
-        res.send(rows)
+      //   console.log(rows)
+      //   res.send(rows)
 
-      });
+      // });
     });
 
 
     app.put('/api/messages/', async (req, res) => {
     // await fakeNetworkDelay();
+
         console.log('Test PUT at messages')
         console.log(req.body.mykey)
         const date = getDate();
