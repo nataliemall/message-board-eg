@@ -27,3 +27,7 @@ PostgresQL database steps:
 
 heroku addons:create heroku-postgresql:hobby-dev
 npm install pg
+
+
+- learn about how to interact with the database using postgres syntax (look into pg documentation)
+https://node-postgres.com/
