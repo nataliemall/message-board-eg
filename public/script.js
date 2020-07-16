@@ -20,26 +20,44 @@ function refreshDisplay() {
 function displayMessage(message1) {   
   var recent_quotes = message1;
 
+  console.log('all_recent_quotes', recent_quotes);
+  console.log('names', recent_quotes["name"]);
   // var justQuotes = message1[message];
   // console.log('quotes:', Object.entries(message1));
-  console.log('recent quotes', recent_quotes)
+  console.log('recent quotes', recent_quotes[0]);
+
 
   var mydata = (recent_quotes) ? recent_quotes.rows: null ;
-  // var mydata = JSON.parse(recent_quotes);
-  console.log('mydata', mydata)
+
+  // var mydata2 = JSON.parse(recent_quotes);
+  // console.log('mydata2', mydata2)
+
+  // var test5 = JSON.stringify(recent_quotes[0]);
   var test5 = JSON.stringify(recent_quotes);
-  console.log('stringified:', recent_quotes);
+  console.log('test5', test5);
+  var test7 = JSON.parse(test5);
+  console.log('test7', test7);
 
-  displayElement.innerHTML += test5;
+  var test8 = test7[0];
 
-  // below is the code for decripting the data from the sqlite database:
-  // var i;
-  //   for (i = 0; i < 11; i++) {
-  //   // text += cars[i] + "<br>";
-  //   displayElement.innerHTML += ( message1[i].message + '<br>' )
-  //   // .map(record => JSON.stringify(record))
-  //   // .join('<br>');
-  //   }
+  var info = Object.keys(test7).length;
+  console.log('info:', info)
+  console.log('test8', test8);
+  // displayElement.innerHTML += test7["name"] + '<br>';
+
+
+  displayElement.innerHTML = " ";    // clear old stuff in displayElement:
+
+  var i;
+    for (i = 0; i < info; i++) {
+    // text += cars[i] + "<br>";
+    variable_name = test7[i];
+    console.log(variable_name);
+
+    displayElement.innerHTML += ( test7[i].name + '<br>' )
+    // .map(record => JSON.stringify(record))
+    // .join('<br>');
+    }
 }
 
 

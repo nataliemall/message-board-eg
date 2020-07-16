@@ -113,22 +113,50 @@ async function startApp() {
     app.put('/api/messages/', async (req, res) => {
     // await fakeNetworkDelay();
 
-        console.log('Test PUT at messages')
-        console.log(req.body.mykey)
-        const date = getDate();
-        const time = getTime();
+      try {
+        const client = await pool.connect();
+
+        //select the current 
         const message = req.body.mykey; //"${message}"
-        // Don't do interpolation like this with user-provided data!
-        const command = `
-          INSERT INTO messages (date, time, message)
-          VALUES ("${date}", "${time}", "${message}") 
-            `;
-        db.run(command, (err) => {
-          res.send("done");
-          if (err) {
-            console.log(err)
-          }
-            });
+        console.log('message', message);
+
+        // client.query(`INSERT INTO test_table(name) VALUES ( "${message}")`);
+        // ^^commented out until the display can display all messages
+
+        var id = 7;
+        var name = message;
+        let sql = 'INSERT INTO test_table (id, name) VALUES ($1, $2)';
+        let params = [ id, name ];
+        client.query(sql, params, function(err) {
+  // make sure you handle errors from here as well,
+  // including signaling `res` and `done`
+}); 
+
+        res.send( "sent" );  // do we actually want to send anything?
+        client.release(); //changed from 'release' to 'end'
+      } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+      } 
+
+
+
+        // console.log('Test PUT at messages')  // this is sqlite stuff
+        // console.log(req.body.mykey)
+        // const date = getDate();
+        // const time = getTime();
+        // const message = req.body.mykey; //"${message}"
+        // // Don't do interpolation like this with user-provided data!
+        // const command = `
+        //   INSERT INTO messages (date, time, message)
+        //   VALUES ("${date}", "${time}", "${message}") 
+        //     `;
+        // db.run(command, (err) => {
+        //   res.send("done");
+        //   if (err) {
+        //     console.log(err)
+        //   }
+        //     });
           
         });
 
